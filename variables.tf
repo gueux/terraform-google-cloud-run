@@ -122,7 +122,7 @@ variable "volumes" {
 }
 
 variable "containers" {
-  type = object({
+  type = list(object({
     # GCR hosted image URL to deploy
     image = optional(string, null)
     # Resource limits to the container
@@ -198,7 +198,7 @@ variable "containers" {
       mount_path = string
       name       = string
     })), null)
-  })
+  }))
   default     = null
   description = <<-EOF
     Containers Definitions
