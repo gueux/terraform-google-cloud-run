@@ -142,7 +142,7 @@ variable "containers" {
     # All other probes are disabled if a startup probe is provided, until it succeeds.
     # Container will not be added to service endpoints if the probe fails.
     # More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
-    startup_probe = optional({
+    startup_probe = optional(object({
       failure_threshold     = optional(number, null)
       initial_delay_seconds = optional(number, null)
       timeout_seconds       = optional(number, null)
@@ -161,7 +161,7 @@ variable "containers" {
         port    = optional(number)
         service = optional(string)
       }), null)
-    })
+    }), null)
     # Periodic probe of container liveness. Container will be restarted if the probe fails.
     # More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
     liveness_probe = optional(object({
