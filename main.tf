@@ -45,8 +45,8 @@ resource "google_cloud_run_service" "main" {
           args    = containers.value.argument
 
           ports {
-            name           = containers.value.ports && containers.value.ports.name ? "http1" : containers.value.ports.name
-            container_port = containers.value.ports && containers.value.ports.port ? "8080" : containers.value.ports.port
+            name           = containers.value.ports
+            container_port = containers.value.ports
           }
 
           resources {
