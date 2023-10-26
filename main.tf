@@ -41,7 +41,7 @@ resource "google_cloud_run_service" "main" {
         for_each = var.containers
         content {
           image   = containers.value.image
-          command = containers.value.container_command
+          command = containers.value.command
           args    = containers.value.argument
 
           dynamic "ports" {

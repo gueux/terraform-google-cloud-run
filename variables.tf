@@ -137,7 +137,7 @@ variable "containers" {
     # Arguments passed to the ENTRYPOINT command, include these only if image entrypoint needs arguments
     argument = optional(list(string), null)
     # Leave blank to use the ENTRYPOINT command defined in the container image, include these only if image entrypoint should be overwritten
-    container_command = optional(list(string), null)
+    command = optional(list(string), null)
     # Startup probe of application within the container.
     # All other probes are disabled if a startup probe is provided, until it succeeds.
     # Container will not be added to service endpoints if the probe fails.
