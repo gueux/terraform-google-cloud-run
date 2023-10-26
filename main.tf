@@ -45,8 +45,8 @@ resource "google_cloud_run_service" "main" {
           args    = containers.value.argument
 
           ports {
-            name           = containers.value.ports.name
-            container_port = containers.value.ports.port
+            name           = containers.value.ports && containers.value.ports.name ? "http1" : containers.value.ports.name
+            container_port = containers.value.ports && containers.value.ports.port ? "8080" : containers.value.ports.port
           }
 
           resources {
@@ -121,7 +121,7 @@ resource "google_cloud_run_service" "main" {
           }
 
           dynamic "env" {
-            for_each = containers.value.env_vars
+            for_each = containers.value.env_vars != null ? containers.value.env_vars : []
             content {
               name  = env.value["name"]
               value = env.value["value"]
@@ -129,7 +129,7 @@ resource "google_cloud_run_service" "main" {
           }
 
           dynamic "env" {
-            for_each = containers.value.env_secret_vars
+            for_each = containers.value.env_secret_vars != null ? containers.value.env_secret_vars : []
             content {
               name = env.value.name
               dynamic "value_from" {
@@ -145,7 +145,7 @@ resource "google_cloud_run_service" "main" {
           }
 
           dynamic "volume_mounts" {
-            for_each = containers.value.volume_mounts
+            for_each = containers.value.volume_mounts != null ? containers.value.volume_mounts : []
             content {
               name       = volume_mounts.value["name"]
               mount_path = volume_mounts.value["mount_path"]
