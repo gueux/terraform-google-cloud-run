@@ -40,6 +40,7 @@ resource "google_cloud_run_service" "main" {
       dynamic "containers" {
         for_each = var.containers
         content {
+          name    = containers.value.name
           image   = containers.value.image
           command = containers.value.command
           args    = containers.value.argument

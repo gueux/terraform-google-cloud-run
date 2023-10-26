@@ -123,6 +123,8 @@ variable "volumes" {
 
 variable "containers" {
   type = list(object({
+    # Name of the container
+    name = optional(string, null)
     # GCR hosted image URL to deploy
     image = optional(string, null)
     # Resource limits to the container
