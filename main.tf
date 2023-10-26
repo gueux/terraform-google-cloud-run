@@ -45,10 +45,10 @@ resource "google_cloud_run_service" "main" {
           args    = containers.value.argument
 
           dynamic "ports" {
-            for_each = var.containers.ports != null ? [var.containers.ports] : []
+            for_each = containers.value.ports != null ? [containers.value.ports] : []
             content {
-              name           = containers.value.name
-              container_port = containers.value.port
+              name           = ports.value.name
+              container_port = ports.value.port
             }
           }
 
