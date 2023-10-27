@@ -66,7 +66,7 @@ resource "google_cloud_run_service" "main" {
               timeout_seconds       = startup_probe.value.timeout_seconds
               period_seconds        = startup_probe.value.period_seconds
               dynamic "http_get" {
-                for_each = startup_probe.value.http_get != null ? [1] : []
+                for_each = startup_probe.value.http_get != null ? [startup_probe.value.http_get] : []
                 content {
                   path = http_get.value.path
                   dynamic "http_headers" {
@@ -102,7 +102,7 @@ resource "google_cloud_run_service" "main" {
               timeout_seconds       = liveness_probe.value.timeout_seconds
               period_seconds        = liveness_probe.value.period_seconds
               dynamic "http_get" {
-                for_each = liveness_probe.value.http_get != null ? [1] : []
+                for_each = liveness_probe.value.http_get != null ? [liveness_probe.value.http_get] : []
                 content {
                   path = http_get.value.path
                   dynamic "http_headers" {
