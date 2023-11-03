@@ -87,8 +87,8 @@ resource "google_cloud_run_service" "main" {
               dynamic "grpc" {
                 for_each = startup_probe.value.grpc != null ? [startup_probe.value.grpc] : []
                 content {
-                  port    = grpc.port
-                  service = grpc.service
+                  port    = grpc.value.port
+                  service = grpc.value.service
                 }
               }
             }
@@ -117,8 +117,8 @@ resource "google_cloud_run_service" "main" {
               dynamic "grpc" {
                 for_each = liveness_probe.value.grpc != null ? [liveness_probe.value.grpc] : []
                 content {
-                  port    = grpc.port
-                  service = grpc.service
+                  port    = grpc.value.port
+                  service = grpc.value.service
                 }
               }
             }
