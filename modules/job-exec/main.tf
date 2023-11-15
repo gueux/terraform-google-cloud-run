@@ -111,7 +111,7 @@ resource "terracurl_request" "exec" {
   // repeated job runs on every refresh
   destroy_url            = "https://run.googleapis.com/v2/${google_cloud_run_v2_job.job.id}"
   destroy_method         = "GET"
-  destroy_response_codes = [200]
+  destroy_response_codes = [200, 401]
   destroy_headers = {
     Authorization = "Bearer ${data.google_client_config.default.access_token}"
     Content-Type  = "application/json",
